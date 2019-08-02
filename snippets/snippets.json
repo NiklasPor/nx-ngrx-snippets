@@ -1,0 +1,110 @@
+{
+  "action-class-nx-ngrx": {
+    "prefix": ["Action Class Nx NgRx", "action-class"],
+    "body": [
+      "export class ${1:Name} implements Action {",
+      "\treadonly type = ${TM_FILENAME_BASE/((.*\\.).*)/${2:/pascalcase}/}ActionTypes.${1:Name};",
+      "\tconstructor(${0}) {}",
+      "}"
+    ],
+    "description": "An action class with empty constructor."
+  },
+  "action-type-nx-ngrx": {
+    "prefix": ["Action Type Nx NgRx", "action-type"],
+    "body": [
+      "${1:Name} = '[${TM_FILENAME_BASE/((.*\\.).*)/${2:/pascalcase}/}]${1/([A-Z])/ ${1:/upcase}/g}',${0}"
+    ],
+    "description": "An action definition type."
+  },
+  "effect-simple-nx-ngrx": {
+    "prefix": ["Effect (Simple) Nx NgRx", "effect"],
+    "body": [
+      "@Effect() ${1:name}$ = this.actions$.pipe(",
+      "\tofType<${2:Action}>(${TM_FILENAME_BASE/((.*\\.).*)/${2:/pascalcase}/}ActionTypes.${2:Action}),",
+      "\tmap(() => new ${0})",
+      ");"
+    ],
+    "description": "A simple effect."
+  },
+  "effect-update-pessimistic-nx-ngrx": {
+    "prefix": ["Effect Update (Pessimistic) Nx NgRx", "effect-pessimistic"],
+    "body": [
+      "@Effect() ${1:name}$ = this.dataPersistence.pessimisticUpdate<${2:Action}>(${TM_FILENAME_BASE/((.*\\.).*)/${2:/pascalcase}/}ActionTypes.${2:Action},{",
+      "\trun: (action, state) => {",
+      "\t\t${0}",
+      "\t},",
+      "\tonError: (action, error) => {",
+      "\t\tconsole.error('Error', error);",
+      "\t\treturn null;",
+      "\t}",
+      "});"
+    ],
+    "description": "A pessimistic update effect."
+  },
+  "effect-update-optimistic-nx-ngrx": {
+    "prefix": ["Effect Update (Optimistic) Nx NgRx", "effect-optimistic"],
+    "body": [
+      "@Effect() ${1:name}$ = this.dataPersistence.optimisticUpdate<${2:Action}>(${TM_FILENAME_BASE/((.*\\.).*)/${2:/pascalcase}/}ActionTypes.${2:Action},{",
+      "\trun: (action, state) => {",
+      "\t\t${0}",
+      "\t},",
+      "\tundoAction: (action, error) => {",
+      "\t\tconsole.error('Error', error);",
+      "\t\treturn new ${3:UndoAction}; ",
+      "\t}",
+      "});"
+    ],
+    "description": "An optimistic update effect."
+  },
+  "effect-navigation-nx-ngrx": {
+    "prefix": ["Effect Navigation Nx NgRx", "effect-navigation"],
+    "body": [
+      "@Effect() navigation$ = this.dataPersistence.navigation(${1:Component}, {",
+      "\trun: (a: ActivatedRouteSnapshot) => {",
+      "\t\treturn new ${2:LoadAction}(${0});",
+      "\t},",
+      "\tonError: (a: ActivatedRouteSnapshot, e: any) => {",
+      "\t\tconsole.error(e);",
+      "\t\treturn null;",
+      "\t}",
+      "});"
+    ],
+    "description": "A navigation effect."
+  },
+  "reducer-action-case-nx-ngrx": {
+    "prefix": ["Reducer Action Case Nx NgRx", "case-action", "reducer-case"],
+    "body": [
+      "case ${TM_FILENAME_BASE/((.*\\.).*)/${2:/pascalcase}/}ActionTypes.${2:Action} : {",
+      "\tstate = {",
+      "\t\t...state,",
+      "\t\t${0}",
+      "\t};",
+      "\tbreak;",
+      "}"
+    ],
+    "description": "An action case for the reducer."
+  },
+  "selector-nx-ngrx": {
+    "prefix": ["Selector Nx NgRx", " selector"],
+    "body": [
+      "const ${1:name} = createSelector(",
+      "\tget${TM_FILENAME_BASE/((.*\\.).*)/${2:/pascalcase}/}State,",
+      "\t(state: ${TM_FILENAME_BASE/((.*\\.).*)/${2:/pascalcase}/}State) => state.${0}",
+      ");"
+    ],
+    "description": "A simple selector."
+  },
+  "selector-loaded-nx-ngrx": {
+    "prefix": ["Selector (+loaded) Nx NgRx", "selector+loaded"],
+    "body": [
+      "const ${1:name} = createSelector(",
+      "\tget${TM_FILENAME_BASE/((.*\\.).*)/${2:/pascalcase}/}State,",
+      "\tgetLoaded,",
+      "\t(state: ${TM_FILENAME_BASE/((.*\\.).*)/${2:/pascalcase}/}State, isLoaded) => isLoaded",
+      "\t\t? state.${0}",
+      "\t\t: undefined",
+      ");"
+    ],
+    "description": "A simple selector with loaded."
+  }
+}
