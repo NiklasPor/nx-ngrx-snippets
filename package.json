@@ -2,6 +2,10 @@
   "name": "nx-ngrx-snippets",
   "displayName": "Nx NgRx Snippets",
   "description": "Minimal snippets for the general usage of NgRx with Nx. Can also be used without Nx.",
+  "repository": {
+    "url": "https://github.com/NiklasPor/nx-ngrx-snippets.git",
+    "type": "git"
+  },
   "publisher": "niklaspor",
   "version": "0.0.1",
   "engines": {
