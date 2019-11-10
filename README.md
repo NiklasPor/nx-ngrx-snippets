@@ -27,9 +27,3 @@ As said before these snippets are best used together with a Nrwl Nx Workspace an
 - Your effects constructor includes `dataPersistence: DataPersistence<[..]PartialState>`.
 - Your selectors include a base feature selector, selecting your whole state: `get[..]State`.
 - Your selectors include a loaded selector, resolving whether your data loading is finished: `getLoaded`.
-
-## Release Notes
-
-### 1.0.0
-
-Initial release of **Nx NgRx Snippets**.

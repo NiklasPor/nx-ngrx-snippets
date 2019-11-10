@@ -1,6 +1,6 @@
 {
   "action-class-nx-ngrx": {
-    "prefix": ["Action Class Nx NgRx", "action-class"],
+    "prefix": ["action-class"],
     "body": [
       "export class ${1:Name} implements Action {",
       "\treadonly type = ${TM_FILENAME_BASE/((.*\\.).*)/${2:/pascalcase}/}ActionTypes.${1:Name};",
@@ -10,14 +10,14 @@
     "description": "An action class with empty constructor."
   },
   "action-type-nx-ngrx": {
-    "prefix": ["Action Type Nx NgRx", "action-type"],
+    "prefix": ["action-type"],
     "body": [
       "${1:Name} = '[${TM_FILENAME_BASE/((.*\\.).*)/${2:/pascalcase}/}]${1/([A-Z])/ ${1:/upcase}/g}',${0}"
     ],
     "description": "An action definition type."
   },
   "effect-simple-nx-ngrx": {
-    "prefix": ["Effect (Simple) Nx NgRx", "effect"],
+    "prefix": ["effect"],
     "body": [
       "@Effect() ${1:name}$ = this.actions$.pipe(",
       "\tofType<${2:Action}>(${TM_FILENAME_BASE/((.*\\.).*)/${2:/pascalcase}/}ActionTypes.${2:Action}),",
@@ -27,7 +27,7 @@
     "description": "A simple effect."
   },
   "effect-update-pessimistic-nx-ngrx": {
-    "prefix": ["Effect Update (Pessimistic) Nx NgRx", "effect-pessimistic"],
+    "prefix": ["effect-pessimistic"],
     "body": [
       "@Effect() ${1:name}$ = this.dataPersistence.pessimisticUpdate<${2:Action}>(${TM_FILENAME_BASE/((.*\\.).*)/${2:/pascalcase}/}ActionTypes.${2:Action},{",
       "\trun: (action, state) => {",
@@ -42,7 +42,7 @@
     "description": "A pessimistic update effect."
   },
   "effect-update-optimistic-nx-ngrx": {
-    "prefix": ["Effect Update (Optimistic) Nx NgRx", "effect-optimistic"],
+    "prefix": ["effect-optimistic"],
     "body": [
       "@Effect() ${1:name}$ = this.dataPersistence.optimisticUpdate<${2:Action}>(${TM_FILENAME_BASE/((.*\\.).*)/${2:/pascalcase}/}ActionTypes.${2:Action},{",
       "\trun: (action, state) => {",
@@ -57,7 +57,7 @@
     "description": "An optimistic update effect."
   },
   "effect-navigation-nx-ngrx": {
-    "prefix": ["Effect Navigation Nx NgRx", "effect-navigation"],
+    "prefix": ["effect-navigation"],
     "body": [
       "@Effect() navigation$ = this.dataPersistence.navigation(${1:Component}, {",
       "\trun: (a: ActivatedRouteSnapshot) => {",
@@ -72,7 +72,7 @@
     "description": "A navigation effect."
   },
   "reducer-action-case-nx-ngrx": {
-    "prefix": ["Reducer Action Case Nx NgRx", "case-action", "reducer-case"],
+    "prefix": ["action-case", "case-action", "reducer-case"],
     "body": [
       "case ${TM_FILENAME_BASE/((.*\\.).*)/${2:/pascalcase}/}ActionTypes.${2:Action} : {",
       "\tstate = {",
@@ -85,7 +85,7 @@
     "description": "An action case for the reducer."
   },
   "selector-nx-ngrx": {
-    "prefix": ["Selector Nx NgRx", " selector"],
+    "prefix": ["selector"],
     "body": [
       "const ${1:name} = createSelector(",
       "\tget${TM_FILENAME_BASE/((.*\\.).*)/${2:/pascalcase}/}State,",
@@ -93,18 +93,5 @@
       ");"
     ],
     "description": "A simple selector."
-  },
-  "selector-loaded-nx-ngrx": {
-    "prefix": ["Selector (+loaded) Nx NgRx", "selector+loaded"],
-    "body": [
-      "const ${1:name} = createSelector(",
-      "\tget${TM_FILENAME_BASE/((.*\\.).*)/${2:/pascalcase}/}State,",
-      "\tgetLoaded,",
-      "\t(state: ${TM_FILENAME_BASE/((.*\\.).*)/${2:/pascalcase}/}State, isLoaded) => isLoaded",
-      "\t\t? state.${0}",
-      "\t\t: undefined",
-      ");"
-    ],
-    "description": "A simple selector with loaded."
   }
 }
